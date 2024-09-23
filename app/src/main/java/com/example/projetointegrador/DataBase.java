@@ -41,19 +41,23 @@ public class DataBase {
             public void onResponse(String response) {
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONArray userArray = jsonArray.getJSONArray(i);
-                        List<String> innerList = new ArrayList<>();
-                        String username = userArray.getString(0);
-                        innerList.add(username);
-                        String password = userArray.getString(1);
-                        innerList.add(password);
-                        listaDeListas.add(innerList);
 
-                        Log.d(TAG, "Username: " + username + ", Password: " + password);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONArray userArray = jsonArray.getJSONArray(i); // O inner array
+                        List<String> innerList = new ArrayList<>();
+                        
+                        for (int j = 0; j < userArray.length(); j++) {
+                            String item = userArray.getString(j); // Pega o item no índice 'j'
+                            innerList.add(item); // Adiciona o item à innerList
+                        }
+
+                        listaDeListas.add(innerList); // Adiciona a innerList à lista principal
+
+                        // Logando os valores extraídos
+                        Log.d(TAG, "Inner Array (userArray): " + innerList.toString());
                     }
 
-                    // Chama o callback quando a resposta for processada
+                    // Chama o callback com a lista completa
                     callback.onSuccess(listaDeListas);
 
                 } catch (Exception e) {
