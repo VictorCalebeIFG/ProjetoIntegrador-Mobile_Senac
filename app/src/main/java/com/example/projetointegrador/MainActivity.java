@@ -18,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,46 +34,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        String url = "https://script.google.com/macros/s/AKfycbz9T2lWp8J9sGtGWmzKh2MabQlDEyjEEF7TnXpL4osTGU964CLKKsctEYTlkndE6dy-/exec?action=getdata&wkname=Data";
+        String url = "?action=getdata&wkname=Data";
 
+        DataBase db = new DataBase(this);
 
-        final TextView textView = (TextView) findViewById(R.id.data);
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-                            StringBuilder formattedResponse = new StringBuilder();
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONArray userArray = jsonArray.getJSONArray(i);
-                                String username = userArray.getString(0);
-                                String password = userArray.getString(1);
-                                formattedResponse.append("User: ").append(username).append(", Password: ").append(password).append("\n");
-                            }
-
-                            textView.setText(formattedResponse.toString());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            textView.setText("Error parsing response!");
-                        }
-                    }
-                }, new Response.ErrorListener() {
+        db.makeRequest(url, new DataBase.VolleyCallback() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                textView.setText("That didn't work!");
+            public void onSuccess(List<List<String>> result) {
+                // Aqui você pode continuar o processamento dos dados, mas eles já estarão no Logcat
             }
         });
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-
 
     }
 }
