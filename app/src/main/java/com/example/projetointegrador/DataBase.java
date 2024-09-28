@@ -4,6 +4,7 @@ import static android.content.ContentValues.TAG;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,7 +25,6 @@ public class DataBase {
     static final String TAG = "DataBaseLog";
 
     public DataBase(Context context) {
-        // Corrigir como obter a URL da string de recursos
         this.url = context.getString(R.string.url);
         this.queue = Volley.newRequestQueue(context);
 
@@ -78,5 +78,7 @@ public class DataBase {
     public interface VolleyCallback {
         void onSuccess(List<List<String>> result);
     }
+
+
 
 }
