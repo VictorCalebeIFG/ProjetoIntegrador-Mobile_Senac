@@ -2,6 +2,7 @@ package com.example.projetointegrador;
 
 import static android.app.PendingIntent.getActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -53,7 +54,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
         if(view == butEntrar){
             pgBar.setVisibility(view.VISIBLE);
-            String action = "?action=getdata&wkname=Data";
+            String action = "?action=getdata&wkname=Users";
             DataBase db = new DataBase(this);
 
             db.makeRequest(action, new DataBase.VolleyCallback() {
@@ -67,6 +68,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                             Login.this.sendMsg("Usuário Encotrado e Senha Correta");
                             userFound = userValue;
                             pgBar.setVisibility(view.INVISIBLE);
+                            Login.this.changeToNextPage();
                             break;
                         }
                     }
@@ -87,5 +89,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void sendMsg(String msg){
         Toast toast = Toast.makeText(this,msg,Toast.LENGTH_LONG);
         toast.show();
+
+    }
+
+    public void changeToNextPage(){
+        Intent vanPage = new Intent(this,ListaVans.class);
+        startActivity(vanPage);
     }
 }

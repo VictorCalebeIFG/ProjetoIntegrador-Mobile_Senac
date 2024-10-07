@@ -15,6 +15,12 @@
         android:theme="@style/Theme.ProjetoIntegrador"
         tools:targetApi="31">
         <activity
+            android:name=".addVanPage"
+            android:exported="false" />
+        <activity
+            android:name=".ListaVans"
+            android:exported="false" />
+        <activity
             android:name=".Login"
             android:exported="false" />
         <activity
