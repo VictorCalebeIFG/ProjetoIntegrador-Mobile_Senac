@@ -7,4 +7,48 @@
     android:layout_height="match_parent"
     tools:context=".addVanPage">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="Anuncio:"
+            android:textAlignment="center"
+            android:textSize="34sp" />
+
+        <EditText
+            android:id="@+id/mlVanDesc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_edit_text"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:padding="20dp" />
+
+        <Button
+            android:id="@+id/btnenviar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3.2"
+            android:text="Enviar"
+            android:textColor="#000000"
+            android:textSize="34sp"
+            app:backgroundTint="#FDD900" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

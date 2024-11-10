@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Projeto Integrador</string>
-    <string name="url">https://script.google.com/macros/s/AKfycbxA3bVqOZAh1oczt6HY3PO_UqEGsJhoZwcQyxgqIn9nIu6USoRAbEsMcswpUV_r2w4/exec</string>
+    <string name="url">https://script.google.com/macros/s/AKfycbxswigRLxHhytvRBwZRHQmSSoZ-h5pn2qhqZMxQcnv9cdyFCMUBfLlQZWuxfrLzuNKv/exec</string>
     <string name="addText">Adicionar Van</string>
     <string name="deleteText">Remover Van</string>
     <string name="UserText">Usuário:</string>
