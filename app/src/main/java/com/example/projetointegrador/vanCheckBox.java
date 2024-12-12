@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 public class vanCheckBox extends androidx.appcompat.widget.AppCompatCheckBox {
 
     String user;
+    String code;
 
     public vanCheckBox(Context context) {
         super(context);

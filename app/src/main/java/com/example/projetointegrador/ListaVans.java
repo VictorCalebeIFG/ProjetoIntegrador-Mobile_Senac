@@ -2,6 +2,7 @@ package com.example.projetointegrador;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ public class ListaVans extends AppCompatActivity implements View.OnClickListener
     LinearLayout vanLayout;
     ProgressBar pgBar;
     Button addVan;
+    Button removeVan;
     List<vanCheckBox> vansList;
 
     private boolean isFirstLoad = true;
@@ -32,8 +34,10 @@ public class ListaVans extends AppCompatActivity implements View.OnClickListener
         vanLayout = findViewById(R.id.myvans);
         pgBar = findViewById(R.id.pgBar);
         addVan = findViewById(R.id.btnAdd);
+        removeVan = findViewById(R.id.rmvButton);
 
         addVan.setOnClickListener(this);
+        removeVan.setOnClickListener(this);
 
         vansList = new ArrayList<>();
 
@@ -68,6 +72,7 @@ public class ListaVans extends AppCompatActivity implements View.OnClickListener
                 for (int i = 0; i < result.size(); i++) {
                     List<String> row = result.get(i);
                     String vanUser = row.get(0);
+                    String vancode = row.get(0);
 
                     // Verificar duplicidade de forma mais direta
                     boolean alreadyExists = false;
@@ -83,6 +88,7 @@ public class ListaVans extends AppCompatActivity implements View.OnClickListener
                         vanCheckBox vanDescription = new vanCheckBox(ListaVans.this);
                         vanDescription.setText(row.get(1));
                         vanDescription.user = vanUser;
+                        vanDescription.code = vancode;
 
                         vansList.add(vanDescription);
 
@@ -108,6 +114,33 @@ public class ListaVans extends AppCompatActivity implements View.OnClickListener
         if (view == addVan) {
             Intent addVanPage = new Intent(this, addVanPage.class);
             startActivity(addVanPage);
+        }
+        if (view == removeVan) {
+            for (vanCheckBox van : vansList) {
+                if (van.isChecked()) {
+                    DataBase db = new DataBase(this);
+                    String action = "?action=deletewhere&wkname=Vans" + "&value=" + van.code;
+                    pgBar.setVisibility(View.VISIBLE);
+                    db.makeRequest(action, new DataBase.VolleyCallback() {
+
+                        @Override
+                        public void onSuccess(List<List<String>> result) {
+                            pgBar.setVisibility(View.INVISIBLE);
+                        }
+
+                    });
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            recreate(); // Replace with your function
+                        }
+                    }, 3000);
+
+
+
+                }
+            }
         }
     }
 }
